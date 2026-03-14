@@ -1,5 +1,4 @@
 import mongoose, {Schema} from 'mongoose'
-import { use } from 'react'
 const userSchema=new Schema(
     {
         username:{
@@ -17,7 +16,7 @@ const userSchema=new Schema(
             lowercase:true,
             trim:true,
         },
-        fullname:{
+        fullName:{
             type:String,
             required:true,
             trim:true,
