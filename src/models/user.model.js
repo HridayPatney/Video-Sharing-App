@@ -1,4 +1,7 @@
 import mongoose, {Schema} from 'mongoose'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 const userSchema=new Schema(
     {
         username:{
@@ -47,13 +50,12 @@ const userSchema=new Schema(
 
 
 )
-userSchema.pre("save",async function(next){
+userSchema.pre("save",async function(){
    if(!this.isModified("password")){
-        return next()
+        return 
     }   // so that password is only hashed when it is modified or newly created
     
     this.password=await bcrypt.hash(this.password,10)
-    next()
 })
 
 userSchema.methods.comparePassword=async function(password){
